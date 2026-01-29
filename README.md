@@ -63,6 +63,7 @@ Add an arrow that points from the annotation box to a specific location on the s
 **Parameters:**
 - `head-x`: Horizontal position of arrow head as percentage of viewport
 - `head-y`: Vertical position of arrow head as percentage of viewport
+- `arrow-offset`: Distance to shorten the arrow from the head end (default: `0px`). Accepts any CSS length unit (e.g., `10px`, `1em`, `0.5rem`)
 
 **Note:** Both `head-x` and `head-y` must be specified to display an arrow. Omit both to show only the annotation box.
 

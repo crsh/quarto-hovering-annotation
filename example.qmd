@@ -45,6 +45,7 @@ This is **important content** that needs explanation.
   box-y="68" 
   head-x="40" 
   head-y="45" 
+  arrow-offset="10px"
   annotation-width="35%" 
   color="2" 
 >}}
@@ -54,9 +55,10 @@ This is **important content** that needs explanation.
   box-x="0" 
   box-y="68" 
   head-x="30" 
-  head-y="37" 
+  head-y="37"
+  arrow-offset="10px"
   annotation-width="35%" 
-  color="3" 
+  color="3"
 >}}
 
 

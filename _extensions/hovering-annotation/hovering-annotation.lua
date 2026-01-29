@@ -27,8 +27,8 @@ end
 
 function annotate(args, kwargs, meta)
   -- Extract parameters with proper defaults
-  local box_x = tonumber(pandoc.utils.stringify(kwargs["box-x"] or "50"))
-  local box_y = tonumber(pandoc.utils.stringify(kwargs["box-y"] or "50"))
+  local box_x = tonumber(pandoc.utils.stringify(kwargs["box-x"])) or 50
+  local box_y = tonumber(pandoc.utils.stringify(kwargs["box-y"])) or 50
   local annotation_text = pandoc.utils.stringify(kwargs["annotation"] or "")
   local annotation_width = pandoc.utils.stringify(kwargs["annotation-width"] or "50%")
   local mark_width = pandoc.utils.stringify(kwargs["mark-width"] or "1.2em")
@@ -51,6 +51,15 @@ function annotate(args, kwargs, meta)
   if has_head then
     local head_x = tonumber(pandoc.utils.stringify(kwargs["head-x"]))
     local head_y = tonumber(pandoc.utils.stringify(kwargs["head-y"]))
+    
+    -- Handle arrow offset with proper default
+    local arrow_offset = "0px"
+    if kwargs["arrow-offset"] ~= nil then
+      local offset_str = pandoc.utils.stringify(kwargs["arrow-offset"])
+      if offset_str ~= "" then
+        arrow_offset = offset_str
+      end
+    end
 
     -- Only create arrow if conversion to number succeeded
     if head_x and head_y then
@@ -59,7 +68,7 @@ function annotate(args, kwargs, meta)
         {},
         {
           class = "annotation-arrow",
-          style = string.format("--ax:%s; --ay:%s; --bx:%s; --by:%s; --col:%s;", box_x, box_y, head_x, head_y, color)
+          style = string.format("--ax:%s; --ay:%s; --bx:%s; --by:%s; --col:%s; --offset:%s;", box_x, box_y, head_x, head_y, color, arrow_offset)
         }
       )
     end
@@ -113,7 +122,7 @@ end
 function mark(args, kwargs, meta)
   -- Extract parameters with defaults
   local color = parse_color(kwargs["color"])
-  local opacity = tonumber(pandoc.utils.stringify(kwargs["opacity"] or "50")) or 50
+  local opacity = tonumber(pandoc.utils.stringify(kwargs["opacity"])) or 50
   
   -- Get the text content (first positional argument)
   -- If it's a string, parse it as markdown
