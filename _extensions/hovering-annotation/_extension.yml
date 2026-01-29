@@ -1,6 +1,0 @@
-title: Hovering annotations for reveal.js
-author: Frederik Aust
-version: 0.1.0
-contributes:
-  shortcodes: 
-    - hovering-annotation.lua
