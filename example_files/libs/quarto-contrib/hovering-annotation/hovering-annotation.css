@@ -7,6 +7,7 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
+  container-type: size;
 }
 
 /* Text box */
@@ -21,6 +22,7 @@
   border-left: 14px solid var(--col);
   font-size: 0.75em;
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  pointer-events: auto;
 }
 
 /* Mark indicator */
@@ -34,38 +36,44 @@
 }
 
 /* Arrow shaft */
-.annotation-text .annotation-arrow {
+.annotation .annotation-arrow {
   --h: 6px;
-  --ay: 0;
-  --ax: -11;
-  --by: 100;
-  --bx: -100;
+  --ay: 50;
+  --ax: 50;
+  --by: 50;
+  --bx: 50;
   --col: #3b82f6;
   
   position: absolute;
   background: var(--col);
-  transform-origin: left 50%;
-  left: calc(var(--ax) * 1px);
-  top: calc(var(--ay) * 1px);
+  transform-origin: left center;
+  
+  /* Position at starting point using percentages */
+  left: calc(var(--ax) * 1% + 0.2%);
+  top: calc(var(--ay) * 1% + 0.2%);
   height: var(--h);
-  width: calc(hypot(calc(var(--by) * 1vh - var(--ay) * 1vh), calc(var(--bx) * 1vw - var(--ax) * 1vw)));
-  rotate: atan2(calc(var(--by) * 1vh - var(--ay) * 1vh), calc(var(--bx) * 1vw - var(--ax) * 1vw));
+  
+  /* Calculate using container query units for accurate aspect-aware dimensions */
+  --dx-pct: calc(var(--bx) - var(--ax));
+  --dy-pct: calc(var(--by) - var(--ay));
+  
+  width: hypot(calc(var(--dx-pct) * 1cqi), calc(var(--dy-pct) * 1cqb));
+  rotate: atan2(calc(var(--dy-pct) * 1cqb), calc(var(--dx-pct) * 1cqi));
 }
 
 /* Arrow head */
-.annotation-text .annotation-arrow::after {
+.annotation .annotation-arrow::after {
   content: "";
   position: absolute;
-  right: -2px;
-  top: -10px;
+  right: 3px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-45deg);
   width: 0;
   height: 0;
   border: solid var(--col);
   border-width: 0 6px 6px 0;
-  /* border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px; */
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
   display: inline-block;
   padding: 10px;
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
 }
