@@ -1,33 +1,129 @@
 ---
-title     : "Example of Hovering Annotations"
-subtitle  : "So pretty"
-
-footer: "Place wherever you want"
+title     : "Hovering Annotations"
+subtitle  : "Examples and Features"
+footer    : "Hovering Annotations Extension"
 
 filters:
   - hovering-annotation
 
-format: revealjs
+brand:
+  color:
+    palette:
+      annotation-color-1: "#3b82f6"  # Blue
+      annotation-color-2: "#f97316"  # Orange
+      annotation-color-3: "#10b981"  # Green
+      annotation-color-4: "#8b5cf6"  # Purple
+      annotation-color-5: "#ef4444"  # Red
+
+format:
+  revealjs:
+    width: 960
+    height: 700
 ---
 
-## Heading
+## Boxes with Arrows
 
-This filter adds shortcodes to add hovering annotations to your slides.
+Use arrows to point from annotation boxes to specific elements on your slides.
 
-{{< hovering-annotation annotation="{{< hovering-annotation >}} with options for text, placement, size, and color." box-x="20" box-y="30" head-x="20" head-y="22" max-width = "35%" col = "#3b82f6" >}}
+:::{.fragment}
+This is **important content** that needs explanation.
+:::
 
-{{< hovering-annotation annotation="Hovering because it is a box with a shadow position on top of everything else—just like this one here." box-x="65" box-y="30" head-x="50" head-y="22" max-width = "30%" col = "#f97316" >}}
+{{< hovering-annotation 
+  annotation="Not much of an explanation, really." 
+  box-x="40" 
+  box-y="45" 
+  head-x="30" 
+  head-y="37" 
+  annotation-width="35%" 
+  color="1" 
+>}}
+
+{{< hovering-annotation 
+  annotation="Place the annotation box in a specific location by setting `box-x` and `box-y` coordinates." 
+  box-x="50" 
+  box-y="68" 
+  head-x="40" 
+  head-y="45" 
+  annotation-width="35%" 
+  color="2" 
+>}}
+
+{{< hovering-annotation 
+  annotation="Arrows point to the location set by `head-x` and `head-y` coordinates." 
+  box-x="0" 
+  box-y="68" 
+  head-x="30" 
+  head-y="37" 
+  annotation-width="35%" 
+  color="3" 
+>}}
 
 
-## [Heading 2]{.mark style="background-color:var(--brand-annotation-color-3);"}
+## Boxes Without Arrows
 
-This filter adds shortcodes to add hovering annotations to your slides.
+Omit `head-x` and `head-y` to create floating notes without arrows.
 
-{{< hovering-annotation annotation="Or just omit the arrow for a more general annotation. This can be used with .mark-spans to highlight text." box-x="20" box-y="70" max-width = "35%" col = "3" fragment="false" >}}
+:::{.fragment}
+Some content that doesn't need precise pointing.
+:::
+
+{{< hovering-annotation 
+  annotation="This is a general note that doesn't point to anything specific. Perfect for commentary or reminders." 
+  box-x="20" 
+  box-y="65" 
+  annotation-width="40%" 
+  color="3" 
+>}}
+
+## Highlighting with Marks
+
+Combine annotations with [highlighted text]{.mark style="background-color:var(--brand-annotation-color-4); padding: 0.2em 0.4em; border-radius: 0.2em;"} using the same brand colors.
+
+:::{.fragment}
+The extension integrates with Quarto's brand color system.
+:::
+
+{{< hovering-annotation 
+  annotation="Use `.mark` spans with brand colors to visually connect annotations to specific text or elements." 
+  box-x="20" 
+  box-y="65" 
+  annotation-width="40%" 
+  color="4" 
+  fragment="false" 
+>}}
+
+## Boxes with Mark Indicators
+
+Or place semi-transparent markers freely anywhere on the slide to highlight specific points.
 
 
-## Heading 3
+{{< hovering-annotation 
+  annotation="The circular marker shows exactly where you're pointing. Customize size and opacity." 
+  box-x="50" 
+  box-y="60" 
+  mark-x="30" 
+  mark-y="20" 
+  mark-width="3em" 
+  mark-height="3em" 
+  mark-opacity="0.4" 
+  annotation-width="35%" 
+  color="5" 
+>}}
 
-This filter adds shortcodes to add hovering annotations to your slides.
+## Customization Options
 
-{{< hovering-annotation annotation="Or just omit the arrow for a more general annotation. This can be used with .mark-spans to highlight text." box-x="20" box-y="70" mark-x="25" mark-y="20" mark-width="4em" mark-height="1.2em" mark-opacity="0.5" annotation-width = "35%" col = "4" fragment="false" >}}
+- **Colors:** Use brand colors (1-9) or hex codes
+- **Sizing:** Control `annotation-width`, `mark-width`, `mark-height`
+- **Opacity:** Adjust `mark-opacity` (0-1)
+- **Animation:** Set `fragment="false"` to disable reveal animation
+- **Positioning:** All positions use viewport percentages (0-100)
+
+{{< hovering-annotation 
+  annotation="See the [README](https://github.com/crsh/quarto-hovering-annotation) for complete documentation of all parameters." 
+  box-x="20" 
+  box-y="80" 
+  annotation-width="45%" 
+  color="3" 
+  fragment="false" 
+>}}

@@ -2,15 +2,30 @@ function annotate(args, kwargs, meta)
   -- Extract parameters with proper defaults
   local box_x = tonumber(pandoc.utils.stringify(kwargs["box-x"] or "50"))
   local box_y = tonumber(pandoc.utils.stringify(kwargs["box-y"] or "50"))
-  local annotation = pandoc.utils.stringify(kwargs["annotation"] or "")
+  local annotation_text = pandoc.utils.stringify(kwargs["annotation"] or "")
   local annotation_width = pandoc.utils.stringify(kwargs["annotation-width"] or "50%")
   local mark_width = pandoc.utils.stringify(kwargs["mark-width"] or "1.2em")
   local mark_height = pandoc.utils.stringify(kwargs["mark-height"] or "1.2em")
   local mark_opacity = pandoc.utils.stringify(kwargs["mark-opacity"] or "0.5")
   
+  -- Parse annotation text as markdown to support formatting
+  local annotation_doc = pandoc.read(annotation_text, "markdown")
+  local annotation_inlines = {}
+  for _, block in ipairs(annotation_doc.blocks) do
+    if block.t == "Para" or block.t == "Plain" then
+      for _, inline in ipairs(block.content) do
+        table.insert(annotation_inlines, inline)
+      end
+      -- Add space between paragraphs
+      if #annotation_doc.blocks > 1 then
+        table.insert(annotation_inlines, pandoc.Space())
+      end
+    end
+  end
+  
   -- Allow color to be a variable name (1-5) or a hex color
   -- Convert numbers to brand SCSS variable references
-  local color_input = pandoc.utils.stringify(kwargs["col"] or "1")
+  local color_input = pandoc.utils.stringify(kwargs["color"] or "1")
   local color = color_input:match("^[1-9]$") and ("var(--brand-annotation-color-" .. color_input .. ")") or color_input
   
   local use_fragment = kwargs["fragment"] == nil or pandoc.utils.stringify(kwargs["fragment"]) ~= "false"
@@ -26,29 +41,20 @@ function annotate(args, kwargs, meta)
 
     -- Only create arrow if conversion to number succeeded
     if head_x and head_y then
-      -- Calculate relative offsets in percentages
-      local offset_x = head_x - box_x
-      local offset_y = head_y - box_y
-
-      -- Create arrow div (nested inside text)
+      -- Create arrow div as sibling to text, positioned absolutely
       arrow = pandoc.Div(
         {},
         {
           class = "annotation-arrow",
-          style = string.format("--bx:%s; --by:%s; --col:%s;", offset_x, offset_y, color)
+          style = string.format("--ax:%s; --ay:%s; --bx:%s; --by:%s; --col:%s;", box_x, box_y, head_x, head_y, color)
         }
       )
     end
   end
 
-  -- Create text div with annotation content and arrow
-  local text_content = { pandoc.Plain(pandoc.Str(annotation)) }
-  if arrow then
-    table.insert(text_content, arrow)
-  end
-  
+  -- Create text div with annotation content (without arrow)
   local text = pandoc.Div(
-    text_content,
+    { pandoc.Plain(annotation_inlines) },
     {
       class = "annotation-text",
       style = string.format("top:%s%%; left:%s%%; max-width:%s; --col:%s;", box_y, box_x, annotation_width, color)
@@ -60,8 +66,11 @@ function annotate(args, kwargs, meta)
     stylesheets = { 'hovering-annotation.css' }
   })
 
-  -- Create mark div if mark coordinates are provided
+  -- Create content with text and optionally arrow as siblings
   local content = { text }
+  if arrow then
+    table.insert(content, arrow)
+  end
   if has_mark then
     local mark_x = tonumber(pandoc.utils.stringify(kwargs["mark-x"]))
     local mark_y = tonumber(pandoc.utils.stringify(kwargs["mark-y"]))

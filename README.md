@@ -122,19 +122,21 @@ Define up to 9 annotation colors in your YAML front matter:
 ```yaml
 ---
 brand:
-  annotation-color-1: "#3b82f6"  # Blue
-  annotation-color-2: "#f97316"  # Orange
-  annotation-color-3: "#10b981"  # Green
-  annotation-color-4: "#8b5cf6"  # Purple
-  annotation-color-5: "#ef4444"  # Red
+  color:
+    palette:
+      annotation-color-1: "#3b82f6"  # Blue
+      annotation-color-2: "#f97316"  # Orange
+      annotation-color-3: "#10b981"  # Green
+      annotation-color-4: "#8b5cf6"  # Purple
+      annotation-color-5: "#ef4444"  # Red
 ---
 ```
 
 Then reference them by number in your shortcodes:
 
 ```markdown
-{{< hovering-annotation annotation="Blue annotation" col="1" >}}
-{{< hovering-annotation annotation="Orange annotation" col="2" >}}
+{{< hovering-annotation annotation="Blue annotation" color="1" >}}
+{{< hovering-annotation annotation="Orange annotation" color="2" >}}
 ```
 
 The brand colors are available as CSS variables (`--brand-annotation-color-1` through `--brand-annotation-color-9`) throughout your document for use in custom HTML/CSS.
@@ -144,7 +146,7 @@ The brand colors are available as CSS variables (`--brand-annotation-color-1` th
 You can also specify colors directly using hex codes:
 
 ```markdown
-{{< hovering-annotation annotation="Custom color" col="#ff6b6b" >}}
+{{< hovering-annotation annotation="Custom color" color="#ff6b6b" >}}
 ```
 
 **Parameter:**
@@ -177,7 +179,7 @@ Control whether the annotation appears with Reveal.js fragment animations.
   mark-x="50"
   mark-y="22"
   annotation-width="35%"
-  col="2"
+  color="2"
   mark-width="1.5em"
   mark-height="1.5em"
   mark-opacity="0.6"
