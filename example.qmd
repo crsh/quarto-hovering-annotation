@@ -78,14 +78,14 @@ Some content that doesn't need precise pointing.
 
 ## Highlighting with Marks
 
-Combine annotations with [highlighted text]{.mark style="background-color:var(--brand-annotation-color-4); padding: 0.2em 0.4em; border-radius: 0.2em;"} using the same brand colors.
+Combine annotations with highlighted text using Quarto's [`.mark`-spans]{.mark style="background-color:var(--brand-annotation-color-4)"} or the {{< mark "`{{ < mark > }}` shortcode" color="4" >}} and the same brand colors.
 
 :::{.fragment}
 The extension integrates with Quarto's brand color system.
 :::
 
 {{< hovering-annotation 
-  annotation="Use `.mark` spans with brand colors to visually connect annotations to specific text or elements." 
+  annotation="Visually connect annotations to specific text or elements." 
   box-x="20" 
   box-y="65" 
   annotation-width="40%" 

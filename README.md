@@ -152,7 +152,7 @@ You can also specify colors directly using hex codes:
 ```
 
 **Parameter:**
-- `col`: Color number (1-9) or hex color code (default: `1`)
+- `color`: Color number (1-9) or hex color code (default: `1`)
 
 ### Fragment Animation
 
@@ -168,6 +168,26 @@ Control whether the annotation appears with Reveal.js fragment animations.
   fragment="false" 
 >}}
 ```
+
+### Inline Text Highlighting
+
+Use the `mark` shortcode to highlight inline text with the same brand colors. Perfect for drawing attention to specific words or phrases in your slides.
+
+**Parameters:**
+- First argument (required): The text to highlight (supports markdown formatting)
+- `color`: Color number (1-9) or hex color code (default: `1`)
+- `opacity`: Opacity percentage for the highlight (default: `50`)
+
+**Examples:**
+```markdown
+This is {{< mark "highlighted text" >}} using the default color.
+
+Use different {{< mark "colors" color="4" >}} and {{< mark "opacity" opacity="30" >}} levels.
+
+Markdown formatting works: {{< mark "**bold** and *italic*" color="2" >}}
+```
+
+The `mark` shortcode applies padding, rounded corners, and uses CSS `color-mix()` to blend the brand color with transparency for a subtle highlighting effect that integrates seamlessly with your presentation's color scheme.
 
 ## Complete Example
 
