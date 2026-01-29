@@ -1,0 +1,33 @@
+---
+title     : "Example of Hovering Annotations"
+subtitle  : "So pretty"
+
+footer: "Place wherever you want"
+
+filters:
+  - hovering-annotation
+
+format: revealjs
+---
+
+## Heading
+
+This filter adds shortcodes to add hovering annotations to your slides.
+
+{{< hovering-annotation annotation="{{< hovering-annotation >}} with options for text, placement, size, and color." box-x="20" box-y="30" head-x="20" head-y="22" max-width = "35%" col = "#3b82f6" >}}
+
+{{< hovering-annotation annotation="Hovering because it is a box with a shadow position on top of everything else—just like this one here." box-x="65" box-y="30" head-x="50" head-y="22" max-width = "30%" col = "#f97316" >}}
+
+
+## [Heading 2]{.mark style="background-color:var(--brand-annotation-color-3);"}
+
+This filter adds shortcodes to add hovering annotations to your slides.
+
+{{< hovering-annotation annotation="Or just omit the arrow for a more general annotation. This can be used with .mark-spans to highlight text." box-x="20" box-y="70" max-width = "35%" col = "3" fragment="false" >}}
+
+
+## Heading 3
+
+This filter adds shortcodes to add hovering annotations to your slides.
+
+{{< hovering-annotation annotation="Or just omit the arrow for a more general annotation. This can be used with .mark-spans to highlight text." box-x="20" box-y="70" mark-x="25" mark-y="20" mark-width="4em" mark-height="1.2em" mark-opacity="0.5" annotation-width = "35%" col = "4" fragment="false" >}}

@@ -1,0 +1,7 @@
+color:
+  palette:
+    annotation-color-1: "#3b82f6"  # color 1 (blue)
+    annotation-color-2: "#f97316"  # color 2 (orange)
+    annotation-color-3: "#10b981"  # color 3 (green)
+    annotation-color-4: "#8b5cf6"  # color 4 (purple)
+    annotation-color-5: "#ef4444"  # color 5 (red)
