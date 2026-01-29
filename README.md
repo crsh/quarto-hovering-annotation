@@ -7,7 +7,7 @@ To see the annotations in action see the [example slides](https://frederikaust.c
 ## Installing
 
 ```bash
-quarto add crsh/hovering-annotation
+quarto add crsh/quarto-hovering-annotation
 ```
 
 This will install the extension under the `_extensions` subdirectory.
