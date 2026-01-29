@@ -43,6 +43,7 @@
   --by: 50;
   --bx: 50;
   --col: #3b82f6;
+  --offset: 0;
   
   position: absolute;
   background: var(--col);
@@ -57,7 +58,7 @@
   --dx-pct: calc(var(--bx) - var(--ax));
   --dy-pct: calc(var(--by) - var(--ay));
   
-  width: hypot(calc(var(--dx-pct) * 1cqi), calc(var(--dy-pct) * 1cqb));
+  width: calc(hypot(calc(var(--dx-pct) * 1cqi), calc(var(--dy-pct) * 1cqb)) - var(--offset));
   rotate: atan2(calc(var(--dy-pct) * 1cqb), calc(var(--dx-pct) * 1cqi));
 }
 
