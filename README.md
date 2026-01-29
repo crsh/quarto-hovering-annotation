@@ -2,6 +2,8 @@
 
 Add floating annotation boxes with optional arrows and markers to your Quarto Revealjs presentations. Perfect for highlighting specific elements on slides with customizable colors, positioning, and animations.
 
+To see the annotations in action see the [example slides](https://frederikaust.com/quarto-hovering-annotation) and compare to the [source file](example.qmd).
+
 ## Installing
 
 ```bash
@@ -186,8 +188,3 @@ Control whether the annotation appears with Reveal.js fragment animations.
   fragment="true"
 >}}
 ```
-
-## Example
-
-See [example.qmd](example.qmd) for a complete working example.
-
